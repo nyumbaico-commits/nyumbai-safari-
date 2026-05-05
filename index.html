@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Nyumbai Safari Packages</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#FAF8F3;font-family:Georgia,serif;color:#1A1510}
+.hero{position:relative;height:420px;overflow:hidden;background:linear-gradient(160deg,#1a2a1a 0%,#2a3a1a 40%,#1a1a0a 100%)}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,8,5,.15) 0%,rgba(10,8,5,.45) 60%,#FAF8F3 100%)}
+.hero-logo{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-bottom:40px}
+.hero-logo h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,8vw,88px);font-weight:300;letter-spacing:.22em;color:#fff;text-shadow:0 2px 24px rgba(0,0,0,.45);text-transform:uppercase}
+.hero-logo hr{width:60px;border:none;border-top:1px solid rgba(255,255,255,.6);margin:14px 0 10px}
+.hero-logo p{font-size:12px;letter-spacing:.35em;color:rgba(255,255,255,.85);text-transform:uppercase;font-family:Arial}
+.intro{text-align:center;padding:12px 20px 28px;border-bottom:1px solid #E8E0D0}
+.intro p{color:#7A6A50;font-size:14px;max-width:520px;margin:0 auto;line-height:1.7;font-style:italic}
+.intro .tags{display:flex;justify-content:center;gap:28px;margin-top:16px;flex-wrap:wrap}
+.intro .tags span{font-size:10px;letter-spacing:.18em;color:#8B6914;text-transform:uppercase;font-family:Arial}
+.filters{padding:22px 20px 0;max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.filter-row{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.filter-label{font-size:10px;color:#B0A080;letter-spacing:.18em;text-transform:uppercase;font-family:Arial;width:62px}
+.filter-btn{padding:5px 13px;border-radius:20px;border:1px solid #DDD5C0;background:transparent;color:#9A8A6A;font-size:12px;cursor:pointer;font-family:Arial;transition:all .2s}
+.filter-btn.active-gold{border-color:#8B6914!important;background:#8B691412!important;color:#8B6914!important}
+.filter-btn.active-green{border-color:#3A6B52!important;background:#3A6B5212!important;color:#3A6B52!important}
+.filter-btn.active-purple{border-color:#6B4A8A!important;background:#6B4A8A12!important;color:#6B4A8A!important}
+.count{font-size:11px;color:#C0B090;font-family:Arial;margin:2px 0 4px}
+.grid{max-width:1100px;margin:20px auto 0;padding:0 20px 60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.card{background:#fff;border:1px solid #E8E0D0;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.05);transition:all .25s}
+.card.open{box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.card-accent{height:3px;opacity:.35;transition:opacity .25s}
+.card.open .card-accent{opacity:1}
+.card-header{padding:18px 18px 14px;cursor:pointer}
+.card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center;justify-content:space-between}
+.tag-cat{font-size:9px;letter-spacing:.15em;text-transform:uppercase;padding:3px 8px;border-radius:3px;font-family:Arial}
+.tag-label{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#A09070;background:#F5F0E8;padding:3px 8px;border-radius:3px;font-family:Arial}
+.toggle{font-size:20px;color:#C0B090;transition:all .25s;line-height:1}
+.card.open .toggle{transform:rotate(45deg)}
+.card-title{font-size:17px;font-weight:normal;color:#1A1510;margin:0 0 3px;line-height:1.2}
+.card-subtitle{font-size:11px;color:#9A8A6A;margin:0 0 12px;font-family:Arial}
+.card-meta{display:flex;gap:14px;flex-wrap:wrap}
+.meta-item label{font-size:9px;color:#C0B090;text-transform:uppercase;letter-spacing:.12em;font-family:Arial;display:block}
+.meta-item span{font-size:12px;color:#1A1510;font-family:Arial}
+.parks{display:flex;gap:5px;margin-top:10px;flex-wrap:wrap}
+.park{font-size:9px;color:#A09070;border:1px solid #E0D8C8;padding:2px 8px;border-radius:20px;font-family:Arial}
+.card-body{padding:0 18px 18px;border-top:1px solid #F0EAD8;display:none}
+.card.open .card-body{display:block}
+.section-label{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#C0B090;font-family:Arial;margin:14px 0 8px}
+.highlights{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+.highlight{font-size:11px;color:#6A5A3A;background:#F8F4EC;padding:4px 10px;border-radius:3px;font-family:Arial}
+.itinerary{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.itin-row{display:flex;gap:10px;align-items:flex-start}
+.dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.itin-time{font-size:10px;font-family:Arial}
+.itin-label{font-size:12px;color:#4A3A2A;font-family:Arial;line-height:1.5;margin-top:1px}
+.note{border-radius:6px;padding:10px 12px;margin-bottom:14px}
+.note p{font-size:12px;color:#6A5A3A;font-family:Arial;line-height:1.6}
+.enquire-btn{width:100%;padding:12px;color:#fff;border:none;border-radius:6px;font-family:Georgia,serif;font-size:13px;letter-spacing:.08em;cursor:pointer}
+.footer{text-align:center;padding:20px 20px 40px;color:#C0B090;font-size:11px;font-family:Arial;border-top:1px solid #E8E0D0}
+.modal-bg{position:fixed;inset:0;background:rgba(10,8,5,.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:1000}
+.modal-bg.open{display:flex}
+.modal{background:#FAF8F3;border-radius:12px;padding:28px 24px;max-width:480px;width:100%;max-height:90vh;overflow-y:auto}
+.modal-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
+.modal-close{background:none;border:none;font-size:26px;color:#9A8A6A;cursor:pointer;line-height:1;padding:0}
+.modal input,.modal textarea{width:100%;padding:10px 12px;border-radius:6px;border:1px solid #DDD5C0;background:#FAF8F3;font-family:Arial;font-size:13px;color:#1A1510;outline:none;margin-bottom:10px;display:block}
+.modal textarea{height:90px;resize:vertical;margin-bottom:16px}
+.submit-btn{width:100%;padding:13px;color:#fff;border:none;border-radius:6px;font-family:Georgia,serif;font-size:14px;letter-spacing:.06em;cursor:pointer}
+.submit-btn:disabled{background:#C0B090!important;cursor:not-allowed}
+.modal-note{font-size:10px;color:#C0B090;font-family:Arial;text-align:center;margin-top:10px}
+.success{text-align:center;padding:30px 0}
+.empty{text-align:center;padding:60px 20px;color:#C0B090;font-family:Arial}
+@media(max-width:600px){.hero{height:320px}.hero-logo h1{font-size:36px}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <img src="header.jpg" alt="Serengeti" onerror="this.style.display='none'"/>
+  <div class="hero-overlay"></div>
+  <div class="hero-logo">
+    <h1>Nyumbai</h1><hr/>
+    <p>Safari Packages</p>
+  </div>
+</div>
+<div class="intro">
+  <p>15 curated journeys — from day trips to week-long expeditions, budget road drives to luxury fly-ins across Tanzania's greatest wild places.</p>
+  <div class="tags">
+    <span>✦ Budget-Friendly</span><span>✦ Fly-In Luxury</span>
+    <span>✦ Beach &amp; Bush</span><span>✦ Full Northern Circuit</span>
+  </div>
+</div>
+<div class="filters">
+  <div class="filter-row"><span class="filter-label">Duration</span><div id="catFilters"></div></div>
+  <div style="display:flex;gap:20px;flex-wrap:wrap">
+    <div class="filter-row"><span class="filter-label">Budget</span><div id="budgetFilters"></div></div>
+    <div class="filter-row"><span class="filter-label">Origin</span><div id="originFilters"></div></div>
+  </div>
+  <p class="count" id="count"></p>
+</div>
+<div class="grid" id="grid"></div>
+<div class="empty" id="empty" style="display:none">No packages match your filters.</div>
+<div class="footer">All prices are indicative. Rates vary by season, lodge choice, and group size.</div>
+<div class="modal-bg" id="modalBg" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-top">
+      <div>
+        <p id="modalCat" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-family:Arial;margin-bottom:4px"></p>
+        <h3 id="modalTitle" style="font-size:18px;font-weight:normal;font-family:'Cormorant Garamond',serif"></h3>
+        <p id="modalSub" style="font-size:11px;color:#9A8A6A;font-family:Arial;margin-top:2px"></p>
+      </div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div id="formArea">
+      <input id="fName" placeholder="Your name *"/>
+      <input id="fEmail" placeholder="Email address *" type="email"/>
+      <input id="fPhone" placeholder="Phone / WhatsApp"/>
+      <input id="fDates" placeholder="Preferred travel dates"/>
+      <input id="fPeople" placeholder="Number of travellers" type="number" min="1" value="1"/>
+      <textarea id="fMsg" placeholder="Any questions or special requests?"></textarea>
+      <p id="formErr" style="font-size:12px;color:#c0392b;font-family:Arial;margin-bottom:10px;display:none">Something went wrong. Please try again.</p>
+      <button class="submit-btn" id="submitBtn" onclick="submitForm()">Send Enquiry</button>
+      <p class="modal-note">Your details are sent securely to our team.</p>
+    </div>
+    <div id="successArea" class="success" style="display:none">
+      <div style="font-size:40px;margin-bottom:16px">✅</div>
+      <p style="font-size:16px;color:#1A1510;font-family:'Cormorant Garamond',serif;margin-bottom:8px">Enquiry Sent!</p>
+      <p style="font-size:13px;color:#9A8A6A;font-family:Arial;line-height:1.6">We'll be in touch shortly to discuss your safari.</p>
+      <button onclick="closeModal()" style="margin-top:20px;padding:10px 24px;border:none;border-radius:6px;font-family:Arial;cursor:pointer;background:#8B6914;color:#fff">Close</button>
+    </div>
+  </div>
+</div>
+<script>
+const SCRIPT_URL="PASTE_YOUR_APPS_SCRIPT_URL_HERE";
+const COLORS={Budget:"#3A6B52","Mid-Range":"#8B6914",Luxury:"#6B4A8A"};
+const PKG=[
+{id:1,cat:"Day Trip",tag:"Budget Pick",title:"Mikumi Flash Safari",sub:"Dar es Salaam → Mikumi (Drive)",dur:"1 Day",origin:"Dar es Salaam",tier:"Budget",transport:"🚙 Road",parks:["Mikumi"],highlights:["Hippo pools","Elephant herds","Lion pride territory","Baobab landscapes"],itin:[{t:"05:00",l:"Depart Dar es Salaam by road (3.5 hrs)"},{t:"08:30",l:"Arrive Mikumi – morning game drive"},{t:"12:30",l:"Lunch at park lodge / picnic"},{t:"14:00",l:"Afternoon game drive"},{t:"16:00",l:"Depart back to Dar es Salaam"},{t:"19:30",l:"Arrive Dar es Salaam"}],note:"Best value day trip from Dar. No flights needed."},
+{id:2,cat:"Day Trip",tag:"Island Escape",title:"Zanzibar → Mikumi Fly-In",sub:"Zanzibar → Mikumi (Fly)",dur:"1 Day",origin:"Zanzibar",tier:"Mid-Range",transport:"✈️ Fly-In",parks:["Mikumi"],highlights:["Scenic flight over Indian Ocean","Big 5 territory","Elephant & hippo sightings","Same-day return"],itin:[{t:"06:00",l:"Fly Zanzibar → Mikumi airstrip"},{t:"07:00",l:"Morning game drive with bush breakfast"},{t:"12:00",l:"Midday rest & lunch at lodge"},{t:"14:00",l:"Afternoon game drive"},{t:"16:30",l:"Fly Mikumi → Zanzibar"},{t:"17:30",l:"Return to Zanzibar resort"}],note:"Perfect beach-to-bush combo."},
+{id:3,cat:"Day Trip",tag:"World Wonder",title:"Ngorongoro Crater Day",sub:"Arusha → Ngorongoro (Drive)",dur:"1 Day",origin:"Arusha",tier:"Budget",transport:"🚙 Road",parks:["Ngorongoro"],highlights:["Black rhino","Flamingo lake","Densest Big 5 in Africa","Maasai villages en route"],itin:[{t:"06:00",l:"Depart Arusha (2.5 hrs drive)"},{t:"08:30",l:"Descend into crater floor"},{t:"09:00",l:"Full crater game drive"},{t:"13:00",l:"Picnic lunch on crater floor"},{t:"14:30",l:"Continue game drive (rhino search)"},{t:"16:30",l:"Ascend & drive back to Arusha"}],note:"Highest wildlife density per km² in Africa."},
+{id:4,cat:"Weekend",tag:"Quick Escape",title:"Mikumi Weekend",sub:"Dar es Salaam → Mikumi",dur:"2 Days / 1 Night",origin:"Dar es Salaam",tier:"Budget",transport:"🚙 Road",parks:["Mikumi"],highlights:["Sunset game drive","Night sounds of the bush","Early sunrise drive","Hippo pool walks"],itin:[{t:"Day 1 – 05:30",l:"Drive Dar → Mikumi (3.5 hrs)"},{t:"Day 1 – 09:00",l:"Morning game drive"},{t:"Day 1 – 16:00",l:"Sunset game drive & overnight"},{t:"Day 2 – 06:00",l:"Early sunrise game drive"},{t:"Day 2 – 14:00",l:"Return to Dar es Salaam"}],note:"Closest national park to Dar."},
+{id:5,cat:"Weekend",tag:"Crater Wonder",title:"Ngorongoro Overnight",sub:"Arusha → Ngorongoro",dur:"2 Days / 1 Night",origin:"Arusha",tier:"Mid-Range",transport:"🚙 Road",parks:["Ngorongoro"],highlights:["Rim sunset views","Full crater day","Black rhino tracking","UNESCO World Heritage"],itin:[{t:"Day 1 – 07:00",l:"Drive Arusha → Ngorongoro rim"},{t:"Day 1 – 14:00",l:"Afternoon descent – game drive"},{t:"Day 1 – 18:00",l:"Ascend & sunset at rim"},{t:"Day 2 – 06:30",l:"Full day crater game drive"},{t:"Day 2 – 16:00",l:"Drive back to Arusha"}],note:"Staying on the rim gives stunning crater views."},
+{id:6,cat:"3D / 2N",tag:"Northern Classic",title:"Manyara & Ngorongoro",sub:"Dar/Zanzibar → Arusha → Parks",dur:"3 Days / 2 Nights",origin:"Dar es Salaam",tier:"Mid-Range",transport:"✈️🚙 Fly + Road",parks:["Lake Manyara","Ngorongoro"],highlights:["Tree-climbing lions","Flamingo flocks","Ngorongoro Big 5","Maasai culture"],itin:[{t:"Day 1",l:"Fly to Arusha → Drive to Lake Manyara → Afternoon game drive"},{t:"Day 2",l:"Morning game drive Manyara → Drive to Ngorongoro → Rim overnight"},{t:"Day 3",l:"Full crater game drive → Drive to Arusha → Return flight"}],note:"Best intro to Tanzania's northern circuit."},
+{id:7,cat:"3D / 2N",tag:"Zanzibar Gateway",title:"Zanzibar → Serengeti Express",sub:"Zanzibar → Fly-in Serengeti",dur:"3 Days / 2 Nights",origin:"Zanzibar",tier:"Luxury",transport:"✈️ Fly-In",parks:["Serengeti"],highlights:["Wildebeest migration","Big cats","Fly-in bush camp","Endless plains"],itin:[{t:"Day 1",l:"Fly Zanzibar → Seronera → Afternoon game drive → Bush camp"},{t:"Day 2",l:"Full day Serengeti + optional balloon at dawn"},{t:"Day 3",l:"Morning game drive → Fly Seronera → Zanzibar"}],note:"Premium fly-in. Maximum time in Serengeti, minimum travel."},
+{id:8,cat:"3D / 2N",tag:"Southern Circuit",title:"Mikumi & Udzungwa",sub:"Dar es Salaam → Mikumi → Udzungwa",dur:"3 Days / 2 Nights",origin:"Dar es Salaam",tier:"Budget",transport:"🚙 Road",parks:["Mikumi","Udzungwa Mountains"],highlights:["Primate trekking","Waterfalls","Hippo corridor","Off-the-beaten-path"],itin:[{t:"Day 1",l:"Drive Dar → Mikumi → Afternoon game drive"},{t:"Day 2",l:"Morning game drive → Drive to Udzungwa → Afternoon hiking"},{t:"Day 3",l:"Forest walk / waterfall hike → Return to Dar"}],note:"Unique combo of savanna and rainforest. No flights needed."},
+{id:9,cat:"4D / 3N",tag:"Original Route",title:"Manyara → Serengeti Classic",sub:"Dar es Salaam → Arusha → Ndutu",dur:"4 Days / 3 Nights",origin:"Dar es Salaam",tier:"Mid-Range",transport:"✈️🚙 Fly + Road",parks:["Lake Manyara","Serengeti"],highlights:["Lake Manyara flamingos","Ndutu wildebeest","Seronera game drives","Optional balloon"],itin:[{t:"Day 1",l:"Fly Dar → Arusha → Drive to Lake Manyara → Overnight Manyara Secret Lodge"},{t:"Day 2",l:"Drive to Serengeti Ndutu → Full afternoon game drive"},{t:"Day 3",l:"AM + PM game drives → Optional hot air balloon"},{t:"Day 4",l:"Early breakfast → Drive to Arusha → Connect flight"}],note:"Proven route with strong wildlife density."},
+{id:10,cat:"4D / 3N",tag:"Crater Upgrade",title:"Serengeti & Ngorongoro",sub:"Arusha / Zanzibar → Serengeti → Ngorongoro",dur:"4 Days / 3 Nights",origin:"Arusha",tier:"Mid-Range",transport:"✈️🚙 Fly + Road",parks:["Serengeti","Ngorongoro"],highlights:["Serengeti Big Cats","Ngorongoro rhino","Migration plains","Two UNESCO sites"],itin:[{t:"Day 1",l:"Fly to Arusha → Drive to Serengeti → Afternoon game drive"},{t:"Day 2",l:"Full day Serengeti (AM + PM)"},{t:"Day 3",l:"Morning drive → Exit to Ngorongoro → Rim overnight"},{t:"Day 4",l:"Full crater descent → Drive to Arusha → Return flight"}],note:"Most iconic combo in East Africa."},
+{id:11,cat:"4D / 3N",tag:"Fly-In Luxury",title:"Zanzibar Fly-In Safari",sub:"Zanzibar → Serengeti → Ngorongoro",dur:"4 Days / 3 Nights",origin:"Zanzibar",tier:"Luxury",transport:"✈️ Fly-In",parks:["Serengeti","Ngorongoro"],highlights:["No road fatigue","Bush & beach combo","Fly between parks","Premium camps"],itin:[{t:"Day 1",l:"Fly Zanzibar → Seronera → Game drive → Bush camp"},{t:"Day 2",l:"Full Serengeti day → Dawn balloon optional"},{t:"Day 3",l:"Fly Seronera → Ngorongoro → Full crater game drive"},{t:"Day 4",l:"Morning crater walk → Fly Ngorongoro → Zanzibar"}],note:"Zero road travel. Pure flying and wildlife."},
+{id:12,cat:"5D / 4N",tag:"Northern Circuit",title:"The Full Northern Loop",sub:"Tarangire → Manyara → Serengeti → Ngorongoro",dur:"5 Days / 4 Nights",origin:"Dar es Salaam",tier:"Mid-Range",transport:"✈️🚙 Fly + Road",parks:["Tarangire","Lake Manyara","Serengeti","Ngorongoro"],highlights:["Elephant herds (Tarangire)","Tree lions (Manyara)","Migration (Serengeti)","Rhino (Ngorongoro)"],itin:[{t:"Day 1",l:"Fly to Arusha → Drive to Tarangire → Afternoon game drive"},{t:"Day 2",l:"Tarangire → Drive to Lake Manyara → Overnight"},{t:"Day 3",l:"Drive to Serengeti → Afternoon game drive"},{t:"Day 4",l:"Full day Serengeti"},{t:"Day 5",l:"Drive to Ngorongoro → Full crater descent → Fly back"}],note:"Tanzania's complete northern circuit. All Big 5, every ecosystem."},
+{id:13,cat:"5D / 4N",tag:"Southern Deep Dive",title:"Mikumi & Ruaha",sub:"Dar es Salaam → Mikumi → Ruaha",dur:"5 Days / 4 Nights",origin:"Dar es Salaam",tier:"Mid-Range",transport:"🚙 Road",parks:["Mikumi","Ruaha"],highlights:["Huge elephant herds","Remote & uncrowded","Great Ruaha River","Baobab forests"],itin:[{t:"Day 1",l:"Drive Dar → Mikumi → Afternoon game drive"},{t:"Day 2",l:"Full day Mikumi"},{t:"Day 3",l:"Drive to Ruaha → Afternoon game drive"},{t:"Day 4",l:"Full day Ruaha + walking safari"},{t:"Day 5",l:"Morning drive → Return to Dar"}],note:"Tanzania's hidden southern gems. One of Africa's largest parks."},
+{id:14,cat:"7D / 6N",tag:"Ultimate Safari",title:"Best of Tanzania",sub:"Mikumi + Serengeti + Ngorongoro + Manyara",dur:"7 Days / 6 Nights",origin:"Dar es Salaam",tier:"Luxury",transport:"🚙✈️ Road + Flight",parks:["Mikumi","Lake Manyara","Serengeti","Ngorongoro"],highlights:["All 4 top parks","Great Migration","Ngorongoro Crater","Both circuits"],itin:[{t:"Day 1",l:"Drive Dar → Mikumi → Game drive"},{t:"Day 2",l:"Full day Mikumi → Fly to Arusha"},{t:"Day 3",l:"Drive to Lake Manyara → Game drive"},{t:"Day 4",l:"Drive to Serengeti → Game drive"},{t:"Day 5",l:"Full day Serengeti + optional balloon"},{t:"Day 6",l:"Drive to Ngorongoro → Rim sunset"},{t:"Day 7",l:"Full crater descent → Fly back"}],note:"Tanzania's definitive safari experience. Both circuits combined."},
+{id:15,cat:"7D / 6N",tag:"Beach & Bush",title:"Zanzibar + Grand Safari",sub:"Zanzibar → Northern Circuit → Back",dur:"7 Days / 6 Nights",origin:"Zanzibar",tier:"Luxury",transport:"✈️🚙 Fly + Road",parks:["Tarangire","Lake Manyara","Serengeti","Ngorongoro"],highlights:["3 nights Zanzibar beach","Fly to Arusha","Northern circuit 4 parks","Fly back to Zanzibar"],itin:[{t:"Days 1-2",l:"Zanzibar relaxation & spice tour"},{t:"Day 3",l:"Fly Zanzibar → Arusha → Drive to Tarangire"},{t:"Day 4",l:"Tarangire → Drive to Manyara"},{t:"Day 5",l:"Drive to Serengeti → Game drive"},{t:"Day 6",l:"Full Serengeti day → Drive to Ngorongoro"},{t:"Day 7",l:"Full crater game drive → Fly Arusha → Zanzibar"}],note:"Perfect holiday. Beach relaxation and wildlife adventure seamlessly combined."}
+];
+const CATS=["All","Day Trip","Weekend","3D / 2N","4D / 3N","5D / 4N","7D / 6N"];
+const BUDGETS=["All Budgets","Budget","Mid-Range","Luxury"];
+const ORIGINS=["All Origins","Dar es Salaam","Zanzibar","Arusha"];
+let activeCat="All",activeBudget="All Budgets",activeOrigin="All Origins";
+let currentPkg=null;
+function renderFilters(){
+  const cf=document.getElementById("catFilters");
+  cf.style.cssText="display:flex;gap:7px;flex-wrap:wrap";
+  cf.innerHTML="";
+  CATS.forEach(c=>{const b=document.createElement("button");b.className="filter-btn"+(c===activeCat?" active-gold":"");b.textContent=c;b.onclick=()=>{activeCat=c;renderAll()};cf.appendChild(b);});
+  const bf=document.getElementById("budgetFilters");
+  bf.style.cssText="display:flex;gap:7px;flex-wrap:wrap";bf.innerHTML="";
+  BUDGETS.forEach(b=>{const btn=document.createElement("button");const col=b==="Budget"?"active-green":b==="Mid-Range"?"active-gold":b==="Luxury"?"active-purple":"active-gold";btn.className="filter-btn"+(b===activeBudget?" "+col:"");btn.textContent=b;btn.onclick=()=>{activeBudget=b;renderAll()};bf.appendChild(btn);});
+  const of=document.getElementById("originFilters");
+  of.style.cssText="display:flex;gap:7px;flex-wrap:wrap";of.innerHTML="";
+  ORIGINS.forEach(o=>{const btn=document.createElement("button");btn.className="filter-btn"+(o===activeOrigin?" active-green":"");btn.textContent=o;btn.onclick=()=>{activeOrigin=o;renderAll()};of.appendChild(btn);});
+}
+function getFiltered(){
+  return PKG.filter(p=>{
+    const c=activeCat==="All"||p.cat===activeCat;
+    const b=activeBudget==="All Budgets"||p.tier===activeBudget;
+    const o=activeOrigin==="All Origins"||p.origin.includes(activeOrigin==="All Origins"?"":activeOrigin);
+    return c&&b&&o;
+  });
+}
+function renderAll(){
+  renderFilters();
+  const filtered=getFiltered();
+  document.getElementById("count").textContent="Showing "+filtered.length+" of "+PKG.length+" packages";
+  const grid=document.getElementById("grid");grid.innerHTML="";
+  document.getElementById("empty").style.display=filtered.length===0?"block":"none";
+  filtered.forEach(p=>{
+    const col=COLORS[p.tier]||"#8B6914";
+    const card=document.createElement("div");
+    card.className="card";card.id="card"+p.id;
+    card.innerHTML=`<div class="card-accent" style="background:${col}"></div><div class="card-header" onclick="toggleCard(${p.id})"><div class="card-tags"><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag-cat" style="color:${col};background:${col}18">${p.cat}</span><span class="tag-label">${p.tag}</span></div><span class="toggle" style="color:#C0B090">+</span></div><h2 class="card-title">${p.title}</h2><p class="card-subtitle">${p.sub}</p><div class="card-meta"><div class="meta-item"><label>Duration</label><span>${p.dur}</span></div><div class="meta-item"><label>Transport</label><span>${p.transport}</span></div><div class="meta-item"><label>Tier</label><span style="color:${col};font-weight:600">${p.tier}</span></div></div><div class="parks">${p.parks.map(pk=>`<span class="park">${pk}</span>`).join("")}</div></div><div class="card-body"><p class="section-label">Highlights</p><div class="highlights">${p.highlights.map(h=>`<span class="highlight">✦ ${h}</span>`).join("")}</div><p class="section-label">Itinerary</p><div class="itinerary">${p.itin.map(i=>`<div class="itin-row"><div class="dot" style="background:${col}"></div><div><div class="itin-time" style="color:${col}">${i.t}</div><div class="itin-label">${i.l}</div></div></div>`).join("")}</div><div class="note" style="background:${col}08;border:1px solid ${col}22"><p>💡 ${p.note}</p></div><button class="enquire-btn" style="background:${col}" onclick="openModal(${p.id})">Enquire About This Package →</button></div>`;
+    grid.appendChild(card);
+  });
+}
+function toggleCard(id){document.getElementById("card"+id).classList.toggle("open");}
+function openModal(id){
+  currentPkg=PKG.find(p=>p.id===id);
+  const col=COLORS[currentPkg.tier]||"#8B6914";
+  document.getElementById("modalCat").textContent="Enquire";
+  document.getElementById("modalCat").style.color=col;
+  document.getElementById("modalTitle").textContent=currentPkg.title;
+  document.getElementById("modalSub").textContent=currentPkg.dur+" · "+currentPkg.tier;
+  document.getElementById("submitBtn").style.background=col;
+  document.getElementById("formArea").style.display="block";
+  document.getElementById("successArea").style.display="none";
+  document.getElementById("formErr").style.display="none";
+  document.getElementById("modalBg").classList.add("open");
+}
+function closeModal(e){if(!e||e.target===document.getElementById("modalBg"))document.getElementById("modalBg").classList.remove("open");}
+async function submitForm(){
+  const name=document.getElementById("fName").value.trim();
+  const email=document.getElementById("fEmail").value.trim();
+  if(!name||!email)return;
+  const btn=document.getElementById("submitBtn");
+  btn.disabled=true;btn.textContent="Sending...";
+  try{
+    await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email,phone:document.getElementById("fPhone").value,dates:document.getElementById("fDates").value,people:document.getElementById("fPeople").value,message:document.getElementById("fMsg").value,package:currentPkg.title,duration:currentPkg.dur,budgetTier:currentPkg.tier})});
+    document.getElementById("formArea").style.display="none";
+    document.getElementById("successArea").style.display="block";
+  }catch{
+    document.getElementById("formErr").style.display="block";
+    btn.disabled=false;btn.textContent="Send Enquiry";
+  }
+}
+renderAll();
+</script>
+</body>
+</html>
